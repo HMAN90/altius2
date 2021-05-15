@@ -1,0 +1,222 @@
+<html>
+	<head>
+		<style>
+            #mycanvas{
+                background-color: #EEE;
+            }
+        </style>
+	</head>
+	<body>
+
+		<div id="drawSpace">
+			<canvas id="mycanvas" height="700" width="700">
+
+			</canvas>
+		</div>
+		<input type="hidden" id="nbrTours"  value="1">
+		<input type="hidden" id="debutDroite1x" value="0" >
+		<input type="hidden" id="debutDroite1y" value="136" >
+		<input type="hidden" id="finDroite1x" value="0" >
+		<input type="hidden" id="finDroite1y" value="-136" >
+
+		
+		<input type="hidden" id="debutDroite2x" value="20">
+		<input type="hidden" id="debutDroite2y" value="136" >
+		<input type="hidden" id="finDroite2x"  value="20">
+		<input type="hidden" id="finDroite2y" value="-136" >
+
+	</body>
+	
+	<script>
+
+		function toCoordCanvasx(coordx,origineDecalx)
+		{
+			return origineDecalx + coordx ;
+		}
+
+		function toCoordCanvasy(coordy, origineDecaly)
+		{
+			return origineDecaly - coordy ;
+		}
+
+		let canvas = document.getElementById('mycanvas');
+		let ctx = canvas.getContext('2d');
+		var nbrTours = parseInt(document.getElementById('nbrTours').value) ;
+		var angleRotation = nbrTours * ( Math.PI /6);
+		var distance = 200 ;
+		var origineDecalx= 264 ;
+		var origineDecaly =  250 ;
+		var angle = Math.PI ;
+		var debutDroite1x = 250, debutDroite1y = 128 , finDroite1x =  250, finDroite1y = 400;
+		var debutRotaDroite1x =  debutDroite1x * Math.cos(angle) - debutDroite1y * Math.sin(angle), debutRotaDroite1y = debutDroite1x * Math.sin(angle) + debutDroite1y * Math.cos(angle) , finRotaDroite1x =  finDroite1x * Math.cos(angle) - finDroite1y * Math.sin(angle), finRotaDroite1y = finDroite1x * Math.sin(angle) + finDroite1y * Math.cos(angle) ;
+		var debutDroite2x = debutDroite1x + distance , debutDroite2y = 128 , finDroite2x =  finDroite1x + distance, finDroite2y = 400;
+		var debutAbscissex = 250, debutAbscissey = debutDroite1y +  136, finAbscissex =  debutDroite2x, finAbscissey = debutDroite2y + 136;
+
+		var debutBissecx = 250, debutBissecy = 264 , finBissecx =  259, finBissecy = 255;
+//     dessin de la première droite 
+		ctx.beginPath();
+		
+		ctx.moveTo(finDroite1x, finDroite1y);
+		ctx.lineTo(debutDroite1x, debutDroite1y);
+		ctx.strokeStyle= '#4488EE'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+
+		ctx.beginPath();
+		
+		ctx.moveTo(finDroite2x, finDroite2y);
+		ctx.lineTo(debutDroite2x, debutDroite2y);
+		ctx.strokeStyle= '#4488EE'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+
+		ctx.beginPath();
+		
+		ctx.moveTo(finAbscissex, finAbscissey);
+		ctx.lineTo(debutAbscissex, debutAbscissey);
+		ctx.strokeStyle= '#00EE00'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+
+		ctx.beginPath();
+		
+		ctx.moveTo(finRotaDroite1x, finRotaDroite1y);
+		ctx.lineTo(debutRotaDroite1x, debutRotaDroite1y);
+		ctx.strokeStyle= '#00EE00'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+/*
+		ctx.beginPath();
+		
+		ctx.moveTo(finBissecx, finBissecy);
+		ctx.lineTo(debutBissecx, debutBissecy);
+		ctx.strokeStyle= '#FF0000'; 
+		ctx.lineWidth= 3;
+		ctx.stroke();
+*/
+
+// dessin de la deux
+
+run() ;
+		function run()
+		{
+			let canvas = document.getElementById('mycanvas');
+		let ctx = canvas.getContext('2d');
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		var nbrTours = parseInt(document.getElementById('nbrTours').value) % 24;
+
+
+		var angleRotation = (nbrTours * (0- Math.PI /12)),angleRotationDroite2 = (nbrTours * ( 0 - Math.PI /12) * 3)  ;
+		var distance = 200 ;
+		var origineDecalx= 264 ;
+		var origineDecaly =  250 ;
+		//var angle = Math.PI ;
+		var angle = angleRotation ,angle2 = angleRotationDroite2;
+
+		var debutDroite1x = document.getElementById('debutDroite1x').value, debutDroite1y = document.getElementById('debutDroite1y').value;
+		//console.log('debutDroite1y est:' + debutDroite1y) ;
+		var  finDroite1x =  document.getElementById('finDroite1x').value, finDroite1y =  document.getElementById('finDroite1y').value;
+		
+		var debutRotaDroite1x =  debutDroite1x * Math.cos(angle) - debutDroite1y * Math.sin(angle), debutRotaDroite1y = debutDroite1x * Math.sin(angle) + debutDroite1y * Math.cos(angle) , finRotaDroite1x =  finDroite1x * Math.cos(angle) - finDroite1y * Math.sin(angle), finRotaDroite1y = finDroite1x * Math.sin(angle) + finDroite1y * Math.cos(angle) ;
+		
+
+		//document.getElementById('debutDroite1x').value = debutRotaDroite1x ; document.getElementById('debutDroite1y').value = debutRotaDroite1y ;document.getElementById('finDroite1x').value = finRotaDroite1x ; document.getElementById('finDroite1y').value = debutRotaDroite1y ;
+
+		var debutDroite2x = document.getElementById('debutDroite2x').value , debutDroite2y = document.getElementById('debutDroite2y').value;
+		var  finDroite2x =  document.getElementById('finDroite2x').value , finDroite2y = document.getElementById('finDroite2y').value ;
+		var debutRotaDroite2x = ( (debutDroite2x-20) * Math.cos(angle2) - debutDroite2y * Math.sin(angle2)) + 20, debutRotaDroite2y = (debutDroite2x- 20) * Math.sin(angle2) + debutDroite2y * Math.cos(angle2) , finRotaDroite2x = (( finDroite2x - 20) * Math.cos(angle2) - finDroite2y * Math.sin(angle2)) + 20, finRotaDroite2y = (finDroite2x- 20) * Math.sin(angle2) + finDroite2y * Math.cos(angle2) ;
+		var debutAbscissex = 250, debutAbscissey = debutDroite1y +  136, finAbscissex =  debutDroite2x, finAbscissey = debutDroite2y + 136;
+
+		var debutBissecx = 250, debutBissecy = 264 , finBissecx =  259, finBissecy = 255;
+//     dessin de la première droite 
+		var debutDroite1CanvasCoordx = toCoordCanvasx( debutRotaDroite1x,origineDecalx), debutDroite1CanvasCoordy = toCoordCanvasy( debutRotaDroite1y,origineDecaly);
+		var finDroite1CanvasCoordx = toCoordCanvasx( finRotaDroite1x,origineDecalx), finDroite1CanvasCoordy = toCoordCanvasy( finRotaDroite1y,origineDecaly);
+
+		var debutDroite2CanvasCoordx = toCoordCanvasx( debutRotaDroite2x,origineDecalx), debutDroite2CanvasCoordy = toCoordCanvasy( debutRotaDroite2y,origineDecaly);
+		var finDroite2CanvasCoordx = toCoordCanvasx( finRotaDroite2x,origineDecalx), finDroite2CanvasCoordy = toCoordCanvasy( finRotaDroite2y,origineDecaly);
+		try
+		{
+			var m1  = (finRotaDroite1y- debutRotaDroite1y )/(finRotaDroite1x-debutRotaDroite1x)  ;
+			var p1 = debutRotaDroite1y - m1 * debutRotaDroite1x ;
+
+			var m2  = (finRotaDroite2y- debutRotaDroite2y )/(finRotaDroite2x-debutRotaDroite2x)  ;
+			var p2 = debutRotaDroite2y - m2 * debutRotaDroite2x ;
+			var interSectx = toCoordCanvasx( (p2-p1)/(m1 - m2) , origineDecalx),interSecty = toCoordCanvasy( m1 *(p2 - p1) / (m1 - m2) + p1, origineDecaly);
+			//interSectx = toCoordCanvasx(0,origineDecalx) ;
+			//interSecty = toCoordCanvasy(0,origineDecaly) ;
+			ctx.beginPath();
+
+			
+  ctx.lineWidth="2";
+  ctx.arc(interSectx, interSecty, 5, 0, 2 * Math.PI);
+  ctx.fillStyle= '#FF0000'; //Nuance de bleu
+  ctx.fill();
+		}
+		catch(error)
+		{
+			console.error(error);
+		}
+		
+		
+		ctx.beginPath();
+		
+		ctx.moveTo(finDroite1CanvasCoordx, finDroite1CanvasCoordy);
+		ctx.lineTo(debutDroite1CanvasCoordx, debutDroite1CanvasCoordy);
+		ctx.strokeStyle= '#4488EE'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+		
+		ctx.beginPath();
+		
+		ctx.moveTo(finDroite2CanvasCoordx, finDroite2CanvasCoordy);
+		ctx.lineTo(debutDroite2CanvasCoordx, debutDroite2CanvasCoordy);
+
+	//	console.log('dessin debutDroite1x est:' + debutDroite1CanvasCoordx) ;
+	//	console.log('dessin debutDroite1y est:' + debutDroite1CanvasCoordy) ;
+
+		//console.log('dessin finDroite1x est:' + finDroite1CanvasCoordx) ;
+		//console.log('dessin finDroite1y est:' + finDroite1CanvasCoordy) ;
+		ctx.strokeStyle= '#4488EE'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+
+		/*
+		ctx.beginPath();
+		
+		ctx.moveTo(finDroite2x, finDroite2y);
+		ctx.lineTo(debutDroite2x, debutDroite2y);
+		ctx.strokeStyle= '#4488EE'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+		*/
+
+	/*	ctx.beginPath();
+		
+		ctx.moveTo(finAbscissex, finAbscissey);
+		ctx.lineTo(debutAbscissex, debutAbscissey);
+		ctx.strokeStyle= '#00EE00'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+		*/
+
+		
+		
+		/*
+		ctx.beginPath();
+		ctx.moveTo(finRotaDroite1x, finRotaDroite1y);
+		ctx.lineTo(debutRotaDroite1x, debutRotaDroite1y);
+		ctx.strokeStyle= '#00EE00'; //Nuance de bleu
+		ctx.lineWidth= 3;
+		ctx.stroke();
+		*/
+
+		document.getElementById('nbrTours').value = nbrTours + 1 ;
+		setTimeout(run,1500) ;
+			
+		}
+
+
+
+		
+	</script>
+</html>
